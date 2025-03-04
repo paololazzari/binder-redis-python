@@ -22,7 +22,8 @@ USER ${USER}
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
 USER root
+RUN chmod +x ./entrypoint.sh
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 
-CMD redis-server --daemonize yes && jupyter notebook --ip=0.0.0.0
+ENTRYPOINT [ "./entrypoint.sh" ]
